@@ -6,39 +6,40 @@ import com.vectorit.anaw.model.Address;
 import com.vectorit.anaw.model.Category;
 import com.vectorit.anaw.model.Product;
 import com.vectorit.anaw.model.Shop;
+import com.vectorit.anaw.service.ProductService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/products")
+@RequestMapping(value = "/api/v1/products")
 public class ProductController {
-    List<Product> productList;
+    ProductService productService;
 
-    public ProductController() {
-        this.productList = new ArrayList<>();
-        createSampleData();
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping(value = "")
     ResponseEntity<List<Product>> getProducts(){
-        return ResponseEntity.ok(productList);
+        return ResponseEntity.ok(productService.findALlProduct());
     }
 
     @GetMapping(value = "/{name}")
     ResponseEntity<Product> getProduct(@PathVariable String name){
-        List<Product> products = productList.stream().filter(p -> p.getProduct_name().equals(name))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(products.get(0));
+        return ResponseEntity.ok(productService.findALlProduct(name));
     }
 
-    void createSampleData(){
+    @PostMapping(value = "")
+    public ResponseEntity<Product> saveProduct(@RequestBody Product product){
+        productService.saveProduct(product);
+        return ResponseEntity.ok(product);
+    }
+
+    /*void createSampleData(){
         productList.add(new Product("singara",5,new Shop("alimama",new Address("13","05","5b","C","Bashundhora")), Category.Food));
         productList.add(new Product("samucha",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Food));
         productList.add(new Product("singara",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Food));
@@ -60,5 +61,5 @@ public class ProductController {
         productList.add(new Product("Akij",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Cigarette));
 
 
-    }
+    }*/
 }
