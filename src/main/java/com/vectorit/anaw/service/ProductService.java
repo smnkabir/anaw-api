@@ -26,12 +26,25 @@ public class ProductService {
         List<Product> productList = new ArrayList<>();
         productRepository.findAll()
                 .forEach( productList :: add);
-        return productList.stream().filter(product -> product.getProduct_name().equals(name))
+        return productList.stream().filter(product -> product.getName().equals(name))
                 .findAny()
                 .orElse(null);
     }
 
     public void saveProduct(Product product) {
         productRepository.save(product);
+    }
+
+    public Product delete(String name) {
+        List<Product> productList = new ArrayList<>();
+        productRepository.findAll()
+                .forEach( productList :: add);
+
+        Product product = productList.stream().filter(p -> p.getName().equals(name))
+                .findAny()
+                .orElse(null);
+        if(product != null)
+            productRepository.delete(product);
+        return product;
     }
 }

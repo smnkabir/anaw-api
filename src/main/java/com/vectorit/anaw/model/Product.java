@@ -15,8 +15,8 @@ public class Product {
     @Id
     @GeneratedValue
     long productId;
-    String product_name;
-    double price_per_piece;
+    String name;
+    double price;
     Shop shop;
     @Enumerated(EnumType.STRING)
     Category category;

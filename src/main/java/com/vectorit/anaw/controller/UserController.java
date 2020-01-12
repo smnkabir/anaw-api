@@ -1,11 +1,9 @@
 package com.vectorit.anaw.controller;
 
-import com.vectorit.anaw.model.Product;
 import com.vectorit.anaw.model.User;
+import com.vectorit.anaw.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +11,33 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/users")
 public class UserController {
-    List<User> userList = new ArrayList<>();
+    
+    UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping(value = "")
-    ResponseEntity<List<User>> getProducts(){
-        return ResponseEntity.ok(userList);
+    ResponseEntity<List<User>> getUsers(){
+        return ResponseEntity.ok(userService.getAll());
+    }
+
+    @GetMapping(value = "{username}")
+    ResponseEntity<User> getUsers(@PathVariable String username){
+        User user = userService.getAll(username);
+        return ResponseEntity.ok(user);
+    }
+
+    @PostMapping(value = "")
+    public ResponseEntity<User> saveProduct(@RequestBody User user){
+        userService.save(user);
+        return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping(value = "{username}")
+    public ResponseEntity<User> deleteUser(@PathVariable String username){
+        User user = userService.deleteUser(username);
+        return ResponseEntity.ok(user);
     }
 }

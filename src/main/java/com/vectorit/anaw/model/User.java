@@ -2,12 +2,16 @@ package com.vectorit.anaw.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 @Entity
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class User {
 
@@ -18,14 +22,7 @@ public class User {
     private String password;
     private Address address;
     private String number;
+    @Enumerated(EnumType.STRING)
     private Person_type category;
 
-    public User(String name, String userName, String password, Address address, String number, Person_type category) {
-        this.name = name;
-        this.userName = userName;
-        this.password = password;
-        this.address = address;
-        this.number = number;
-        this.category = category;
-    }
 }

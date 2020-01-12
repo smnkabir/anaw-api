@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1/products")
 public class ProductController {
+
     ProductService productService;
 
     public ProductController(ProductService productService) {
@@ -39,27 +40,10 @@ public class ProductController {
         return ResponseEntity.ok(product);
     }
 
-    /*void createSampleData(){
-        productList.add(new Product("singara",5,new Shop("alimama",new Address("13","05","5b","C","Bashundhora")), Category.Food));
-        productList.add(new Product("samucha",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Food));
-        productList.add(new Product("singara",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Food));
-        productList.add(new Product("samucha",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Food));
+    @DeleteMapping(value="{name}")
+    public  ResponseEntity<Product> deleteProduct(@PathVariable String name){
+        Product product = productService.delete(name);
+        return ResponseEntity.ok(product);
+    }
 
-        productList.add(new Product("singara",5,new Shop("alimama",new Address()), Category.Food));
-        productList.add(new Product("samucha",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Food));
-        productList.add(new Product("singara",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Food));
-        productList.add(new Product("samucha",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Food));
-
-        productList.add(new Product("Hollywood",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Cigarette));
-        productList.add(new Product("Banson",10,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Cigarette));
-        productList.add(new Product("Malboro",10,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Cigarette));
-        productList.add(new Product("Akij",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Cigarette));
-
-        productList.add(new Product("Hollywood",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Cigarette));
-        productList.add(new Product("Banson",10,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Cigarette));
-        productList.add(new Product("Malboro",10,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Cigarette));
-        productList.add(new Product("Akij",5,new Shop("alimama",new Address("13","05","5b","","Nikunja")), Category.Cigarette));
-
-
-    }*/
 }
