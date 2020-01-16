@@ -17,15 +17,16 @@ public class DBOrder {
     Long id;
 
     String userName;
-
+    Address address;
     @ElementCollection
     @CollectionTable(name = "order_products", joinColumns = @JoinColumn(name = "order_id"))
     @Column(name = "products")
     List<SelectedProduct> productList;
     double cost;
 
-    public DBOrder(String userName, List<SelectedProduct> productList, double cost) {
+    public DBOrder(String userName, Address address, List<SelectedProduct> productList, double cost) {
         this.userName = userName;
+        this.address = address;
         this.productList = productList;
         this.cost = cost;
     }

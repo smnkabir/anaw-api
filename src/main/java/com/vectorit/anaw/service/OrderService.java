@@ -26,7 +26,7 @@ public class OrderService {
         List<Order> orderList = new ArrayList<>();
         dborderList.stream().forEach(dbOrder -> {
             User user = userService.getAll(dbOrder.getUserName());
-            orderList.add(new Order(user,dbOrder.getProductList(),dbOrder.getCost()));
+            orderList.add(new Order(user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost()));
         });
 
         return  orderList;
@@ -41,14 +41,14 @@ public class OrderService {
         Order order = null;
         if(dbOrder != null){
             User user = userService.getAll(dbOrder.getUserName());
-            order = new Order(user,dbOrder.getProductList(),dbOrder.getCost());
+            order = new Order(user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost());
         }
 
         return  order;
     }
 
     public Order saveOrder(Order order) {
-        DBOrder dbOrder = new DBOrder(order.getUser().getUserName(),order.getProductList(),order.getCost());
+        DBOrder dbOrder = new DBOrder(order.getUser().getUserName(),order.getAddress(),order.getProductList(),order.getCost());
         orderRepository.save(dbOrder);
         return order;
     }

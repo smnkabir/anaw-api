@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Order {
     User user;
+    Address address;
     List<SelectedProduct> productList;
     double cost;
 }
