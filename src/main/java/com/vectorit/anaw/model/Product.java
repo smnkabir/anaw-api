@@ -3,6 +3,7 @@ package com.vectorit.anaw.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 
@@ -20,4 +21,5 @@ public class Product {
     Shop shop;
     @Enumerated(EnumType.STRING)
     Category category;
+    String areas;
 }

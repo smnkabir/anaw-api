@@ -11,8 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
+    Long id;
     User user;
     Address address;
     List<SelectedProduct> productList;
     double cost;
+    int status=0;
 }

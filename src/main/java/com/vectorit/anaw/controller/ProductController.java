@@ -34,6 +34,11 @@ public class ProductController {
         return ResponseEntity.ok(productService.findALlProduct(name));
     }
 
+    @GetMapping(value = "area/{area}")
+    ResponseEntity<List<Product>> getProductByArea(@PathVariable String area){
+        return ResponseEntity.ok(productService.findALlProductByArea(area));
+    }
+
     @PostMapping(value = "")
     public ResponseEntity<Product> saveProduct(@RequestBody Product product){
         productService.saveProduct(product);

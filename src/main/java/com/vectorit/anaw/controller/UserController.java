@@ -2,7 +2,9 @@ package com.vectorit.anaw.controller;
 
 import com.vectorit.anaw.model.User;
 import com.vectorit.anaw.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/v1/users")
 public class UserController {
-    
     UserService userService;
 
     public UserController(UserService userService) {

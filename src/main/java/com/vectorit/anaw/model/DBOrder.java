@@ -23,11 +23,19 @@ public class DBOrder {
     @Column(name = "products")
     List<SelectedProduct> productList;
     double cost;
+    int status = 0;
 
     public DBOrder(String userName, Address address, List<SelectedProduct> productList, double cost) {
         this.userName = userName;
         this.address = address;
         this.productList = productList;
         this.cost = cost;
+    }
+    public DBOrder(String userName, Address address, List<SelectedProduct> productList, double cost,int status) {
+        this.userName = userName;
+        this.address = address;
+        this.productList = productList;
+        this.cost = cost;
+        this.status = status;
     }
 }
