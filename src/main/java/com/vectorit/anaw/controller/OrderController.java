@@ -29,9 +29,9 @@ public class OrderController {
         return ResponseEntity.ok(orderService.findAllOrder(userName));
     }
 
-    @GetMapping(value = "/rider")
-    ResponseEntity<List<Order>> getOrdersForRider(){
-        return ResponseEntity.ok(orderService.findAllOrderForRider());
+    @GetMapping(value = "/rider/{area}")
+    ResponseEntity<List<Order>> getOrdersForRider(@PathVariable String area){
+        return ResponseEntity.ok(orderService.findAllOrderForRider(area));
     }
     @GetMapping(value = "/paid")
     ResponseEntity<List<Order>> getOrderPaid(){

@@ -38,7 +38,7 @@ public class OrderService {
         return  orderList;
     }
 
-    public List<Order> findAllOrderForRider() {
+    public List<Order> findAllOrderForRider(String area) {
         List<DBOrder> dborderList = orderRepository.findByStatus(0);
         List<Order> orderList = new ArrayList<>();
 
@@ -47,7 +47,14 @@ public class OrderService {
             orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus()));
         });
 
-        return  orderList;
+        List<Order> order_area = new ArrayList<>();
+
+        orderList.stream().forEach(order -> {
+            if(order.getAddress().getArea().equals(area))
+                order_area.add(order);
+        });
+
+        return  order_area;
     }
 
     public List<Order> findAllPaidOrder() {
