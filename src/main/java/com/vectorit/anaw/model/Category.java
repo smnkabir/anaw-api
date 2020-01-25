@@ -5,5 +5,6 @@ public enum Category {
     Cigarette,
     Drinks,
     Food,
+    Modi,
     Dress;
 }
