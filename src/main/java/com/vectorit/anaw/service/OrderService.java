@@ -32,7 +32,7 @@ public class OrderService {
         List<Order> orderList = new ArrayList<>();
         dborderList.stream().forEach(dbOrder -> {
             User user = userService.getAll(dbOrder.getUserName());
-            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus()));
+            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus(), dbOrder.getDate()));
         });
 
         return  orderList;
@@ -44,7 +44,7 @@ public class OrderService {
 
         dborderList.stream().forEach(dbOrder -> {
             User user = userService.getAll(dbOrder.getUserName());
-            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus()));
+            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus(),dbOrder.getDate()));
         });
 
         List<Order> order_area = new ArrayList<>();
@@ -63,7 +63,7 @@ public class OrderService {
 
         dborderList.stream().forEach(dbOrder -> {
             User user = userService.getAll(dbOrder.getUserName());
-            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus()));
+            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus(),dbOrder.getDate()));
         });
 
         return  orderList;
@@ -75,7 +75,7 @@ public class OrderService {
 
         dborderList.stream().forEach(dbOrder -> {
             User user = userService.getAll(dbOrder.getUserName());
-            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus()));
+            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus(),dbOrder.getDate()));
         });
 
         return  orderList;
@@ -91,7 +91,7 @@ public class OrderService {
         User user = userService.getAll(dbO.getUserName());
 
         dborderList.stream().forEach(dbOrder ->{
-            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus()));
+            orderList.add(new Order(dbOrder.getId(),user,dbOrder.getAddress(),dbOrder.getProductList(),dbOrder.getCost(),dbOrder.getStatus(),dbOrder.getDate()));
         });
 
 
@@ -99,7 +99,7 @@ public class OrderService {
     }
 
     public Order saveOrder(Order order) {
-        DBOrder dbOrder = new DBOrder(order.getUser().getUserName(),order.getAddress(),order.getProductList(),order.getCost());
+        DBOrder dbOrder = new DBOrder(order.getUser().getUserName(),order.getAddress(),order.getProductList(),order.getCost(),order.getDate());
         orderRepository.save(dbOrder);
         return order;
     }
@@ -110,9 +110,10 @@ public class OrderService {
 
         List<DBOrder> dbOrderList = dborderList.stream().filter(o -> o.getUserName().equals(userName))
                                     .collect(Collectors.toList());
-        DBOrder dbOrder = dbOrderList.get(0);
+        /*DBOrder dbOrder = dbOrderList.get(0);
         if (dbOrder != null)
-            orderRepository.delete(dbOrder);
+            orderRepository.delete(dbOrder);*/
+        dbOrderList.forEach(o -> orderRepository.delete(o));
     }
 
     public void updaateOrder(Order order) {
@@ -120,7 +121,7 @@ public class OrderService {
         if(byId.isPresent()){
             DBOrder dbOrder = byId.get();
             orderRepository.delete(dbOrder);
-            dbOrder = new DBOrder(order.getUser().getUserName(),order.getAddress(),order.getProductList(),order.getCost(),1);
+            dbOrder = new DBOrder(order.getUser().getUserName(),order.getAddress(),order.getProductList(),order.getCost(),1,order.getDate());
             orderRepository.save(dbOrder);
         }
     }

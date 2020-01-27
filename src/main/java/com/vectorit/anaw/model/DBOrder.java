@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -24,18 +25,21 @@ public class DBOrder {
     List<SelectedProduct> productList;
     double cost;
     int status = 0;
+    Long date;
 
-    public DBOrder(String userName, Address address, List<SelectedProduct> productList, double cost) {
+    public DBOrder(String userName, Address address, List<SelectedProduct> productList, double cost, Long date) {
         this.userName = userName;
         this.address = address;
         this.productList = productList;
         this.cost = cost;
+        this.date = date;
     }
-    public DBOrder(String userName, Address address, List<SelectedProduct> productList, double cost,int status) {
+    public DBOrder(String userName, Address address, List<SelectedProduct> productList, double cost,int status, Long date) {
         this.userName = userName;
         this.address = address;
         this.productList = productList;
         this.cost = cost;
         this.status = status;
+        this.date = date;
     }
 }

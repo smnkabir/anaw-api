@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -17,4 +18,5 @@ public class Order {
     List<SelectedProduct> productList;
     double cost;
     int status=0;
+    Long date;
 }
